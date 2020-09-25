@@ -10,6 +10,8 @@ const blogReducer = (state, action) => {
           title: `Blog Post #${state.length + 1}`,
         },
       ]
+    case 'delete_blogpost':
+      return state.filter(blogPost => blogPost.id !== action.payload)
     default:
       return state
   }
