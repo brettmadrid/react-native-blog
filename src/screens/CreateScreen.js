@@ -23,7 +23,12 @@ const CreateScreen = ({ navigation }) => {
       />
       <Button
         title='Add Blog Post'
-        onPress={() => addBlogPost(title, content)}
+        // pass callback to addBlogPost because of async nature of adding a post
+        onPress={() =>
+          addBlogPost(title, content, () => {
+            navigation.navigate('Index')
+          })
+        }
       />
     </View>
   )
