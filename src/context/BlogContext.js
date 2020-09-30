@@ -34,20 +34,17 @@ const getBlogPosts = dispatch => {
 }
 
 const addBlogPost = dispatch => {
-  return (title, content, callback) => {
-    dispatch({ type: 'add_blogpost', payload: { title, content } })
-    if (callback) callback()
+  return async (title, content, callback) => {
+    try {
+      await jsonServer.post('/blogposts', { title, content })
+      // dispatch({ type: 'add_blogpost', payload: { title, content } })
+      if (callback) {
+        callback()
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
-  // return async (title, content, callback) => {
-  //   try {
-  //     await axios.post('http://localhost3000', title, content)
-  //     dispatch({ type: 'add_blogpost', payload: { title, content } })
-  //     callback()
-  //   }
-  //   catch(e) {
-  //     console.log(e)
-  //   }
-  // }
 }
 
 const deleteBlogPost = dispatch => {
